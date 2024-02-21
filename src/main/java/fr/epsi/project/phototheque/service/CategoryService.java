@@ -25,7 +25,7 @@ public class CategoryService {
     }
 
     @Transactional(readOnly = false)
-    public Category  save(Category category){
+    public Category save(Category category){
         return this.categoryRepository.save(category);
     }
 

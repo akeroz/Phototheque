@@ -37,10 +37,26 @@ public class ImageController {
                         v.getId(),
                         v.getName(),
                         v.getContent(),
-                        v.getCategorie(),
+                        v.getCategory().getId(),
                         v.getDescription(),
                         v.getDate(),
                         v.getHasHuman()));
+    }
+
+    @GetMapping("details/{id}")
+    public ImageDto getbyId(@PathVariable String id){
+        ImageDto imageDto = new ImageDto();
+        Image image = this.imageService.getById(Long.valueOf(id));
+
+        imageDto.setCategorie(image.getCategory().getId());
+        imageDto.setContent(image.getContent());
+        imageDto.setDate(image.getDate());
+        imageDto.setName(image.getName());
+        imageDto.setHasHuman(image.getHasHuman());
+        imageDto.setId(image.getId());
+        imageDto.setDescription(image.getDescription());
+
+        return imageDto;
     }
 
     @GetMapping("view/{id}/")
@@ -62,7 +78,7 @@ public class ImageController {
     }
 
     @PostMapping(path = "/upload/",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public String updateImage(@RequestParam("image") MultipartFile file, ModelMap modelMap) throws IOException {
+    public String updateImage(@RequestParam("image") MultipartFile file,@RequestParam("categorieID") Long id, ModelMap modelMap) throws IOException {
 
         String fileName = file.getOriginalFilename();
 
@@ -73,9 +89,9 @@ public class ImageController {
 
             byte[] content = file.getBytes();
             DateTimeFormatter dateformat = DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm:ss");
-            Image image = new Image();
+            ImageDto image = new ImageDto();
 
-            image.setCategorie("default");
+            image.setCategorie(id);
             image.setContent(content);
             image.setDate(dateformat.format(LocalDateTime.now()));
             image.setDescription("Default Description");

@@ -7,23 +7,25 @@ public class ImageDto {
     private Long id;
     private String name;
     private byte[] content;
-    private String categorie;
+    private long categorie;
     private String description;
-    private String date;
-    private boolean hasHuman;
+    private String create_date;
+    private Boolean hasHuman;
 
 
-    public ImageDto(Long id, String name, byte[] content, String categorie, String description, String date, boolean hasHuman){
+    public ImageDto(Long id, String name, byte[] content, Long categorie, String description, String date, boolean hasHuman){
         this.categorie = categorie;
         this.id = id;
         this.description = description;
-        this.date = date;
+        this.create_date = date;
         this.hasHuman = hasHuman;
         this.content = content;
         this.name = name;
     }
 
+    public ImageDto(){
 
+    }
     public String getDescription() {
         return description;
     }
@@ -40,12 +42,12 @@ public class ImageDto {
         return content;
     }
 
-    public String getCategorie() {
+    public Long getCategorie() {
         return categorie;
     }
 
     public String getDate() {
-        return date;
+        return create_date;
     }
 
     public void setDescription(String description) {
@@ -56,7 +58,7 @@ public class ImageDto {
         this.id = id;
     }
 
-    public void setCategorie(String categorie) {
+    public void setCategorie(Long categorie) {
         this.categorie = categorie;
     }
 
@@ -65,11 +67,19 @@ public class ImageDto {
     }
 
     public void setDate(String date) {
-        this.date = date;
+        this.create_date = date;
     }
 
     public void setHasHuman(boolean hasHuman) {
         this.hasHuman = hasHuman;
+    }
+
+    public Boolean getHasHuman() {
+        return hasHuman;
+    }
+
+    public long getCategorieId() {
+        return categorie;
     }
 
     public void setName(String name) {
