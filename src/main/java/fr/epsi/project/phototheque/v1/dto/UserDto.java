@@ -1,5 +1,7 @@
 package fr.epsi.project.phototheque.v1.dto;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 public class UserDto {
     private String firstname;
     private String lastname;
@@ -20,10 +22,13 @@ public class UserDto {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
+
         if (password.length() < 6 || !password.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?].*")) {
             throw new IllegalArgumentException("Le mot de passe doit contenir au moins 6 caractères avec un caractère spécial.");
         }
-        this.password = password;
+        // Cryptage du mot de passe avec Bcrypt
+        this.password = encoder.encode(password);
     }
 
     public String getFirstname() {
