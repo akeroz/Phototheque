@@ -22,11 +22,9 @@ public class UserDto {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
-
         if (password.length() < 6 || !password.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?].*")) {
             throw new IllegalArgumentException("Le mot de passe doit contenir au moins 6 caractères avec un caractère spécial.");
         }
-        // Cryptage du mot de passe avec Bcrypt
         this.password = password;
         this.pseudo = pseudo;
     }
