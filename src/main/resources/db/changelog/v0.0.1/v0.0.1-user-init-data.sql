@@ -1,6 +1,6 @@
-insert into users (firstname,lastname,password) values ('Anakin','Skywalker','mdp1TEST!');
-insert into users (firstname,lastname,password) values ('Luke','Skywalker','mdp2TEST!');
-insert into users (firstname,lastname,password) values ('AObi-Wan','Kenobi','mdp3TEST!');
-insert into users (firstname,lastname,password) values ('Leia','Organa','mdp4TEST!');
+insert into users (firstname,lastname,password,pseudo) values ('Anakin','Skywalker','mdp1TEST!','pseudo');
+insert into users (firstname,lastname,password,pseudo) values ('Luke','Skywalker','mdp2TEST!','pseudo2');
+insert into users (firstname,lastname,password,pseudo) values ('AObi-Wan','Kenobi','mdp3TEST!','pseudo3');
+insert into users (firstname,lastname,password,pseudo) values ('Leia','Organa','mdp4TEST!','pseudo4');
 
 

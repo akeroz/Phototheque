@@ -6,17 +6,19 @@ public class UserDto {
 
     private String password;
 
+    private String pseudo;
+
     private Long id;
 
     public UserDto() {
 
     }
 
-    public UserDto(String firstname, String lastname, String password) {
-        this(null, firstname, lastname, password);
+    public UserDto(String firstname, String lastname, String password, String pseudo) {
+        this(null, firstname, lastname, password, pseudo);
     }
 
-    public UserDto(Long id, String firstname, String lastname, String password) {
+    public UserDto(Long id, String firstname, String lastname, String password, String pseudo) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -26,6 +28,7 @@ public class UserDto {
         }
         // Cryptage du mot de passe avec Bcrypt
         this.password = password;
+        this.pseudo = pseudo;
     }
 
     public String getFirstname() {
@@ -52,6 +55,11 @@ public class UserDto {
         this.password = password;
     }
 
+    public String getPseudo(){return pseudo;}
+
+    public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
+    }
     public Long getId() {
         return id;
     }

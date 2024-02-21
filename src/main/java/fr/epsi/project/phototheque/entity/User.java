@@ -31,6 +31,7 @@ public class User {
     private String firstname;
     private String lastname;
     private String password;
+    private String pseudo;
 
     public Long getId() {
         return id;
@@ -64,4 +65,11 @@ public class User {
         this.password = password;
     }
 
+    public String getPseudo() {
+        return pseudo;
+    }
+
+    public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
+    }
 }

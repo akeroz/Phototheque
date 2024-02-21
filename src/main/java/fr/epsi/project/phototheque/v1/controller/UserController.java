@@ -60,7 +60,7 @@ public class UserController {
     @GetMapping
     public Page<UserDto> findAll(Pageable pageable){
         return this.userService.findAll(pageable)
-                .map(it -> new UserDto(it.getId(), it.getFirstname(), it.getLastname(), it.getPassword()));
+                .map(it -> new UserDto(it.getId(), it.getFirstname(), it.getLastname(), it.getPassword(), it.getPseudo()));
     }
 
     /**
@@ -72,7 +72,7 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<UserDto> findUserById(@PathVariable(name = "id") Long id){
         var user = this.userService.findUserById(id);
-        return ResponseEntity.of(user.map(it -> new UserDto(it.getId(), it.getFirstname(), it.getLastname(), it.getPassword())));
+        return ResponseEntity.of(user.map(it -> new UserDto(it.getId(), it.getFirstname(), it.getLastname(), it.getPassword(), it.getPseudo())));
     }
 
     /**
@@ -88,6 +88,7 @@ public class UserController {
         userEntity.setLastname(user.getLastname());
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
         userEntity.setPassword(encoder.encode(user.getPassword()));
+        userEntity.setPseudo(user.getPseudo());
         this.userService.save(userEntity);
         return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").build(userEntity.getId()))
                 .build();
