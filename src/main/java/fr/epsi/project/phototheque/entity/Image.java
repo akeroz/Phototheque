@@ -1,8 +1,11 @@
 package fr.epsi.project.phototheque.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.hibernate.mapping.Join;
 
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "images")
@@ -12,15 +15,15 @@ public class Image implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
-
     @Lob
     private byte[] content;
-    private String categorie;
 
+    @ManyToOne()
+    @JsonIgnore
+    private Category category;
     private String description;
-    private String date;
+    private String create_date;
     private Boolean hasHuman;
 
 
@@ -32,10 +35,6 @@ public class Image implements Serializable {
         return id;
     }
 
-    public String getCategorie() {
-        return categorie;
-    }
-
     public byte[] getContent() {
         return content;
     }
@@ -45,7 +44,7 @@ public class Image implements Serializable {
     }
 
     public String getDate() {
-        return date;
+        return create_date;
     }
 
     public String getName() {
@@ -64,19 +63,23 @@ public class Image implements Serializable {
         this.name = name;
     }
 
-    public void setCategorie(String categorie) {
-        this.categorie = categorie;
-    }
-
     public void setDescription(String description) {
         this.description = description;
     }
 
     public void setDate(String date) {
-        this.date = date;
+        this.create_date = date;
     }
 
     public void setContent(byte[] content) {
         this.content = content;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
