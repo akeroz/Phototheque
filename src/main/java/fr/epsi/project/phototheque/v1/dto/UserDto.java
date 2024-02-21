@@ -4,20 +4,23 @@ public class UserDto {
     private String firstname;
     private String lastname;
 
+    private String password;
+
     private Long id;
 
     public UserDto() {
 
     }
 
-    public UserDto(String firstname, String lastname) {
-        this(null, firstname, lastname);
+    public UserDto(String firstname, String lastname, String password) {
+        this(null, firstname, lastname, password);
     }
 
-    public UserDto(Long id, String firstname, String lastname) {
+    public UserDto(Long id, String firstname, String lastname, String password) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
+        this.password = password;
     }
 
     public String getFirstname() {
@@ -36,6 +39,14 @@ public class UserDto {
         this.lastname = lastname;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public Long getId() {
         return id;
     }
@@ -43,4 +54,5 @@ public class UserDto {
     public void setId(Long id) {
         this.id = id;
     }
+
 }

@@ -59,7 +59,7 @@ public class UserController {
     @GetMapping
     public Page<UserDto> findAll(Pageable pageable){
         return this.userService.findAll(pageable)
-                .map(it -> new UserDto(it.getId(), it.getFirstname(), it.getLastname()));
+                .map(it -> new UserDto(it.getId(), it.getFirstname(), it.getLastname(), it.getPassword()));
     }
 
     /**
@@ -71,7 +71,7 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<UserDto> findUserById(@PathVariable(name = "id") Long id){
         var user = this.userService.findUserById(id);
-        return ResponseEntity.of(user.map(it -> new UserDto(it.getId(), it.getFirstname(), it.getLastname())));
+        return ResponseEntity.of(user.map(it -> new UserDto(it.getId(), it.getFirstname(), it.getLastname(), it.getPassword())));
     }
 
     /**
@@ -85,6 +85,7 @@ public class UserController {
         var userEntity = new User();
         userEntity.setFirstname(user.getFirstname());
         userEntity.setLastname(user.getLastname());
+        userEntity.setPassword(user.getPassword());
         this.userService.save(userEntity);
         return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").build(userEntity.getId()))
                 .build();
