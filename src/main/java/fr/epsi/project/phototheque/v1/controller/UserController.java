@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  * Controleur permettant de gérer les appels http de la forme "/v1/user"
@@ -85,7 +86,8 @@ public class UserController {
         var userEntity = new User();
         userEntity.setFirstname(user.getFirstname());
         userEntity.setLastname(user.getLastname());
-        userEntity.setPassword(user.getPassword());
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
+        userEntity.setPassword(encoder.encode(user.getPassword()));
         this.userService.save(userEntity);
         return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").build(userEntity.getId()))
                 .build();
